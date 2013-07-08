@@ -29,7 +29,12 @@ public class FieldTypeASCII extends FieldType
 	public Object getSimpleValue(TiffField entry) 
 	{
 		final byte[] rawBytes = getRawBytes(entry);
-		return new String(rawBytes, 0, rawBytes.length-1); // strip '\0' character
+		
+        if (rawBytes.length > 0) {
+            return new String(rawBytes, 0, rawBytes.length - 1); // strip '\0' character
+        } else {
+            return "";
+        }
 	}
 
 	public byte[] writeData(Object o, int byteOrder) throws ImageWriteException
